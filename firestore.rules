@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && (
+             request.auth.token.email.matches('.*@sting\\.co') || 
+             request.auth.token.email.matches('.*@sting\\.com') || 
+             request.auth.token.email in ['evelyn.felizzola@sting.co', 'admin@example.com']
+      );
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow get: if true; // Allow checking if a specific email/UID exists
+      allow create: if true; // Allow pre-registration and seeding
+      allow update, delete: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+    }
+    
+    // Startups collection
+    match /startups/{startupId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+    
+    // Votes collection
+    match /votes/{voteId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && 
+                       request.auth.uid == request.resource.data.userId &&
+                       !exists(/databases/$(database)/documents/votes/$(request.auth.uid));
+      allow update, delete: if false; // Votes cannot be modified or deleted
+    }
+    
+    // Meeting requests collection
+    match /meetingRequests/{requestId} {
+      allow read: if request.auth != null && (
+        request.auth.uid == resource.data.userId || isAdmin()
+      );
+      allow create: if request.auth != null && 
+                       request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth != null && 
+                       request.auth.uid == resource.data.userId;
+      allow update: if false; // Meeting requests cannot be modified
+    }
+    
+    // Admin analytics (aggregated data)
+    match /analytics/{document=**} {
+      allow read: if isAdmin();
+      allow write: if false; // Managed by Cloud Functions
+    }
+  }
+}

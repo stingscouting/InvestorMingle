@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Outfit', sans-serif;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-text-primary;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-serif {
+    font-family: 'DM Serif Display', serif;
+  }
+}
+
+@layer components {
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-3xl shadow-card p-6;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .card-premium {
+    @apply px-8 py-12 transition-all duration-500 relative flex flex-col items-center text-center;
+    border-radius: 60px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/70 border border-white/40 shadow-card;
+  }
+
+  .glassmorphism {
+    @apply backdrop-blur-md bg-white/60 border border-white/30;
+  }
+
+  .card-elevated {
+    @apply shadow-elevated;
+  }
+
+  /* Button styles */
+  .btn {
+    @apply px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95;
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-opacity-90;
+  }
+
+  .btn-secondary {
+    @apply bg-primary text-white hover:bg-opacity-90;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+  }
+
+  /* Toggle button */
+  .toggle-btn {
+    @apply relative inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold transition-all duration-300;
+    @apply shadow-sm active:scale-95 touch-target;
+  }
+
+  .toggle-btn.active {
+    @apply bg-primary text-white shadow-premium;
+    background: linear-gradient(135deg, #23544E 0%, #3a7c73 100%);
+  }
+
+  .toggle-btn:not(.active) {
+    @apply bg-bg-card text-primary border-none shadow-sm;
+  }
+
+  /* Input styles */
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-border bg-white text-text-primary;
+    @apply focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-20;
+    @apply transition-all duration-200;
+    min-height: 48px;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 2px 6px;
+  }
+
+  /* Nav item */
+  .nav-item {
+    @apply flex flex-col items-center justify-center gap-1 px-3 py-2 rounded-lg transition-colors duration-200;
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .nav-item.active {
+    @apply bg-primary bg-opacity-10 text-primary;
+  }
+
+  .nav-item:not(.active) {
+    @apply text-text-secondary;
+  }
+}
+
+@layer utilities {
+
+  /* Touch-friendly utilities */
+  .touch-target {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Safe area padding for mobile */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .shadow-premium {
+    box-shadow: 0 10px 40px -10px rgba(35, 84, 78, 0.3);
+  }
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth spring animation */
+.spring {
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
