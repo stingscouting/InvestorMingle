@@ -78,15 +78,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
 
         try {
+            const cleanEmail = email.toLowerCase().trim();
             // Priority 1: Check if email is used as Document ID (Optimized for Path 1)
-            const userDoc = await getDoc(doc(db, 'users', email));
+            const userDoc = await getDoc(doc(db, 'users', cleanEmail));
             if (userDoc.exists()) {
                 return { id: userDoc.id, ...userDoc.data() } as User;
             }
 
-            // Priority 2: Fallback to query (if they registered via Path 2 previously)
+            // Priority 2: Fallback to query (For users already converted to UID profile)
             const usersRef = collection(db, 'users');
-            const q = query(usersRef, where('email', '==', email.toLowerCase()));
+            const q = query(usersRef, where('email', '==', cleanEmail));
             const querySnapshot = await getDocs(q);
 
             if (!querySnapshot.empty) {
@@ -98,7 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
             return null;
         } catch (error) {
-            // Silently return null on permission error to trigger Path 2 registration
+            console.error('Error fetching user by email:', error);
             return null;
         }
     };

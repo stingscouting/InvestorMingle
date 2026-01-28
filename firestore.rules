@@ -13,10 +13,9 @@ service cloud.firestore {
     
     // Users collection
     match /users/{userId} {
-      allow get: if true; // Allow checking if a specific email/UID exists
+      allow get, list: if true; // Allow checking if email/UID exists and searching by email
       allow create: if true; // Allow pre-registration and seeding
       allow update, delete: if request.auth != null && (request.auth.uid == userId || isAdmin());
-      allow list: if isAdmin();
     }
     
     // Startups collection
