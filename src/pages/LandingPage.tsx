@@ -1,3 +1,4 @@
+// Final deployment version - Jan 28, 2026
 import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Mail, Building2, User } from 'lucide-react';
