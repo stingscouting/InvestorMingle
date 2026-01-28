@@ -86,7 +86,7 @@ const StartupsPage: React.FC = () => {
                     <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight">Sting Climate Race</h1>
                     <div className="flex items-center justify-center gap-2 text-white/70">
                         <MapPin className="w-4 h-4" />
-                        <span className="text-sm font-medium tracking-wide uppercase">Stockholm / 2025</span>
+                        <span className="text-sm font-medium tracking-wide uppercase">Stockholm / 2026</span>
                     </div>
                 </div>
             </div>
