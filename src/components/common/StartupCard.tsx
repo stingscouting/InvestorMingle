@@ -3,6 +3,8 @@ import { Globe, Linkedin } from 'lucide-react';
 import { Startup } from '@/types';
 import { cn } from '@/utils/helpers';
 
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+
 interface StartupCardProps {
     startup: Startup;
     isRequested: boolean;
@@ -19,6 +21,7 @@ const StartupCard: React.FC<StartupCardProps> = ({
     index,
 }) => {
     const [expanded, setExpanded] = useState(false);
+    const [cardRef, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
 
     // Map to equally intense pastel gradient backgrounds using index for perfect distribution
     const getBgGradient = () => {
@@ -47,7 +50,11 @@ const StartupCard: React.FC<StartupCardProps> = ({
 
     return (
         <div
-            className="card-premium mb-12 animate-scale-up"
+            ref={cardRef}
+            className={cn(
+                "card-premium mb-12 opacity-0 translate-y-8 transition-all duration-700 ease-out",
+                isIntersecting && "opacity-100 translate-y-0"
+            )}
             style={{ backgroundImage: getBgGradient() }}
         >
             {/* Logo or Icon */}

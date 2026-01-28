@@ -45,15 +45,15 @@ const LeaderboardPage: React.FC = () => {
         );
     }
 
-    const topThree = leaderboard.slice(0, 3);
-    const remaining = leaderboard.slice(3);
+    const winners = leaderboard.filter(entry => entry.voteCount > 0).slice(0, 3);
+    const remaining = leaderboard.filter(entry => !winners.find(w => w.startup.id === entry.startup.id));
 
-    // Reorder top three for podium display: [2nd, 1st, 3rd]
-    const podiumOrder = topThree.length >= 3
-        ? [topThree[1], topThree[0], topThree[2]]
-        : topThree.length === 2
-            ? [topThree[1], topThree[0]]
-            : topThree;
+    // Reorder winners for podium display: [2nd, 1st, 3rd]
+    const podiumOrder = winners.length >= 3
+        ? [winners[1], winners[0], winners[2]]
+        : winners.length === 2
+            ? [winners[1], winners[0]]
+            : winners;
 
     return (
         <div className="min-h-screen pb-32 safe-top bg-[#FBFBFB] relative">

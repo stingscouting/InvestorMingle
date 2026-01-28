@@ -73,10 +73,9 @@ const AdminDashboard: React.FC = () => {
 
                 const meetingsData = meetingsSnap.docs.map(doc => doc.data() as MeetingRequest);
                 const votesData = votesSnap.docs.map(doc => doc.data() as Vote);
-                const startupsData = startupsSnap.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                } as Startup));
+                const startupsData = startupsSnap.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() } as Startup))
+                    .filter(s => s.name && s.name.trim() !== '');
 
                 const votedUserIds = new Set(votesSnap.docs.map(doc => doc.id));
 

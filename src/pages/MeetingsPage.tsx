@@ -56,7 +56,7 @@ const MeetingsPage: React.FC = () => {
                 </div>
             </div>
 
-            <div className="max-w-2xl mx-auto px-4 pb-12">
+            <div className="max-w-2xl mx-auto px-4 pt-12 pb-12">
                 {requestedMeetings.length === 0 ? (
                     <div className="text-center py-20 animate-fade-in">
                         <div className="w-20 h-20 bg-bg-card rounded-full flex items-center justify-center mx-auto mb-6">

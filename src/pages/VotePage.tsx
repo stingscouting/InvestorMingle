@@ -67,7 +67,7 @@ const VotePage: React.FC = () => {
                     </div>
                     <h1 className="text-4xl font-bold text-text-primary mb-4">Vote Submitted!</h1>
                     <p className="text-text-secondary text-lg mb-2">
-                        Thank you for participating in the Sting Climate Race.
+                        Thank you for participating in the Sting Climate Race Investor Mingle
                     </p>
                     <p className="text-text-secondary text-lg mb-8">
                         You voted for: <span className="text-primary font-bold">{votedStartup?.name}</span>

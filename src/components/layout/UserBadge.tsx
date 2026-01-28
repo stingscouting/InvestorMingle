@@ -20,20 +20,20 @@ const UserBadge: React.FC<UserBadgeProps> = ({ className }) => {
         .slice(0, 2);
 
     return (
-        <div className={cn("flex items-center gap-3 bg-white/60 backdrop-blur-md border border-primary/20 rounded-full pl-1 pr-4 py-1 animate-fade-in shadow-sm", className)}>
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shadow-sm">
-                {initials || <UserIcon className="w-4 h-4" />}
+        <div className={cn("flex items-center gap-2 bg-white/60 backdrop-blur-md border border-primary/20 rounded-full pl-0.5 pr-3 py-0.5 animate-fade-in shadow-sm", className)}>
+            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                {initials || <UserIcon className="w-3 h-3" />}
             </div>
             <div className="flex flex-col">
-                <span className="text-[10px] uppercase tracking-widest font-bold text-text-secondary/60 leading-none">Logged in as</span>
-                <span className="text-sm font-bold text-text-primary leading-tight truncate max-w-[120px]">{user.name}</span>
+                <span className="text-[8px] uppercase tracking-widest font-bold text-text-secondary/60 leading-none">Logged in as</span>
+                <span className="text-xs font-bold text-text-primary leading-tight truncate max-w-[100px]">{user.name}</span>
             </div>
             <button
                 onClick={() => logout()}
-                className="ml-2 p-1.5 rounded-full hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+                className="ml-1 p-1 rounded-full hover:bg-black/5 text-text-secondary/40 hover:text-primary transition-colors"
                 title="Logout"
             >
-                <LogOut className="w-3.5 h-3.5" />
+                <LogOut className="w-3 h-3" />
             </button>
         </div>
     );

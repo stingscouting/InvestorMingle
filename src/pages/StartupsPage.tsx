@@ -59,7 +59,8 @@ const StartupsPage: React.FC = () => {
             const matchesSearch = startup.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 startup.description.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesTab && matchesSearch;
-        });
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     if (startupsLoading) {
         return (
@@ -97,7 +98,7 @@ const StartupsPage: React.FC = () => {
                     <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary/40 group-focus-within:text-primary transition-colors" strokeWidth={2} />
                     <input
                         type="text"
-                        placeholder="Search startups, solutions or industry..."
+                        placeholder="Search startups..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full pl-14 pr-6 py-5 rounded-2xl bg-white border border-transparent shadow-premium text-text-primary text-base placeholder:text-text-secondary/30 transition-all focus:border-primary/20 focus:ring-4 focus:ring-primary/5 focus:outline-none"
